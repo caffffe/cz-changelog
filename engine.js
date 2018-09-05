@@ -94,18 +94,20 @@ module.exports = function (options) {
         var head = (answers.type + scope + ': ' + answers.subject.trim()).slice(0, maxLineWidth);
 
         // Wrap these lines at 100 characters
-        var body = wrap(answers.body, wrapOptions);
+        // var body = wrap(answers.body, wrapOptions);
 
         // Apply breaking change prefix, removing it if already present
         var breaking = answers.breaking ? answers.breaking.trim() : '';
         breaking = breaking ? 'BREAKING CHANGE: ' + breaking.replace(/^BREAKING CHANGE: /, '') : '';
         breaking = wrap(breaking, wrapOptions);
 
-        var issues = answers.issues ? wrap(answers.issues, wrapOptions) : '';
+        // var issues = answers.issues ? wrap(answers.issues, wrapOptions) : '';
 
-        var footer = filter([ breaking, issues ]).join('\n\n');
+        // var footer = filter([ breaking, issues ]).join('\n\n');
 
-        commit(head + '\n\n' + body + '\n\n' + footer);
+        var footer = filter([ breaking ]).join('\n\n');
+
+        commit(head + '\n\n' + footer);
       });
     }
   };
